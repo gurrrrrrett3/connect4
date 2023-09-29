@@ -87,6 +87,18 @@ export default class Game {
 
       this.state = winner === 1 ? GameState.PLAYER1_WIN : GameState.PLAYER2_WIN;
     } else if (this.board.isFull()) {
+      this.currentPlayer.socket.emit("gameUpdate", {
+        board: this.boardArray,
+        validMoves: this.getValidMoves(),
+        myTurn: false,
+      });
+
+      this.otherPlayer.socket.emit("gameUpdate", {
+        board: this.boardArray,
+        validMoves: this.getValidMoves(),
+        myTurn: false,
+      });
+
       this.currentPlayer.socket.emit("gameEnd", false, "Draw!");
       this.otherPlayer.socket.emit("gameEnd", false, "Draw!");
 
