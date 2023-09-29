@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="./src/index.ts"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="nav">
+      <div class="nav-left">
+        <h2>connect4 | <span id="gameid">Loading...</span></h2>
+      </div>
+
+      <div class="nav-center">
+        <span id="status">Loading...</span>
+      </div>
+
+      <div class="nav-right">
+        <span id="player1">Loading...</span>
+        <span class="you" id="youp1" hidden>(you)</span>
+        <span class="vs">vs</span>
+        <span id="player2">Loading...</span>
+        <span class="you" id="youp2" hidden>(you)</span>
+      </div>
+    </div>
+
+    <div class="game-container">
+      <table class="game" id="game"></table>
+    </div>
+
+    <div class="footer">
+      <a>src</a>
+      <div>
+        <input type="checkbox" id="usecolors" checked />
+        <label for="usecolors">Use classic colors</label>
+      </div>
+    </div>
+  </body>
+</html>

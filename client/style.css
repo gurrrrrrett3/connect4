@@ -1,0 +1,111 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: black;
+  color: white;
+  font-family: "Roboto Mono", sans-serif;
+}
+
+h1 {
+  font-size: 3rem;
+  text-align: left;
+  margin: 2rem 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: black;
+  border-bottom: 2px solid white;
+
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-left .nav-center .nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: black;
+  border-top: 2px solid white;
+
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+}
+
+.footer > * {
+  margin-right: 1rem;
+}
+
+.game-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.you {
+  color: #555;
+}
+
+.vs {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+table .game {
+  border: 1px solid white;
+  border-collapse: collapse;
+  width: 50vw;
+  height: 50vw;
+}
+
+.slot {
+  background-color: #222;
+  border-radius: 5px;
+  padding: 5px;
+  border-collapse: collapse;
+  width: 5vw;
+  height: 5vw;
+  text-align: center;
+  font-size: 5rem;
+  cursor: pointer;
+}
+
+.slot.hover {
+  background-color: #555;
+}
+
+.slot.p1 {
+  background-color: #f00;
+}
+
+.slot.p2 {
+  background-color: #0f0;
+}
+
+.slot.p1.hover {
+  background-color: #f55;
+}
+
+.slot.p2.hover {
+  background-color: #5f5;
+}
+
