@@ -1,4 +1,4 @@
-import GameState from "./gameState";
+import GameState from "./gameState.js";
 
 export interface ServerToClientEvents {
   // session events
