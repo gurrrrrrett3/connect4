@@ -1,50 +1,46 @@
-import http from "http";
-import express from "express";
+import "dotenv/config";
+import { createServer, Server as HttpServer } from "http";
+import express, { Application } from "express";
 import { Server, Socket } from "socket.io";
-import { ClientToServerEvents, ServerToClientEvents } from "./types/events";
 import CookieParser from "cookie-parser";
-import SocketManager from "./managers/socketManager";
-import path from "path";
-import GameManager from "./managers/gameManager";
-import SessionManager from "./managers/sessionManager";
-import Player from "./classes/player";
-import Logger from "./util/logger";
+import IndexRouter from "./router/index.js";
+import Database from "./database/index.js";
+import { Logger } from "./utils/logger.js";
 
-export const config: {
-  port: number;
-} = require("../config.js");
+export default class Core {
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+    public static server: HttpServer;
+    public static app: Application;
+    public static io: Server;
+    public static db: Database;
+    private static _logger = new Logger("Core");
 
-io.on("connection", (socket) => {
-  SocketManager.handleConnection(socket);
-});
+    public static async init() {
+        this.app = express();
+        this.server = createServer(this.app);
+        this.io = new Server(this.server);
 
-app.use(CookieParser());
+        this.app.use(express.json());
+        this.app.use(express.urlencoded({ extended: true }));
+        this.app.use(CookieParser());
 
-app.get("/", (req, res) => {
-  const game = GameManager.createGame();
-  res.redirect(`/g/${game.id}`);
-});
+        this.app.use(IndexRouter)
 
-app.use(express.static("client"));
-app.use("/client", express.static("client/dist/client/"));
+        const port: number = parseInt(process.env.PORT || "3000");
 
-app.get("/g/:id", (req, res) => {
-  const game = GameManager.getGame(req.params.id);
+        this.db = new Database(() => {
+            this.app.listen(port, () => {
+                this._logger.info(`Server started on port ${port}`);
+            })
+        });
 
-  if (!game) {
-    res.redirect("/");
-    return;
-  }
+        this.io.on("connection", (socket: Socket) => {
+            this._logger.info(`Socket connected: ${socket.id}`);
+            socket.on("disconnect", () => {
+                this._logger.info(`Socket disconnected: ${socket.id}`);
+            });
+        });
+    }
+}
 
-  res.sendFile(path.join(__dirname, "../client/dist/client/index.html"));
-});
-
-server.listen(config.port, () => {
-  console.log(`listening on *:${config.port}`);
-});
-
-export type GameSocket = Socket<ClientToServerEvents, ServerToClientEvents>;
+Core.init()

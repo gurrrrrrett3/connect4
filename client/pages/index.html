@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../style.css" />
+  <script type="module" src="../src/index.ts"></script>
+  <title>connect4</title>
+
+  <meta name="keywords" content="gart, gart.sh, connect4, game, multiplayer" />
+  <meta name="title" content="connect4 | gart.sh" />
+</head>
+
+<body>
+
+
+  <div class="auth" id="auth">
+    <img src="/auth/avatar" id="icon" />
+    <div class="login" id="login" hidden>
+      <a href="/auth/login">login ...</a>
+    </div>
+  </div>
+
+
+  <div class="container">
+    <div class="control">
+      <h1>connect 4</h1>
+
+      <form class="settings" id="settings" action="/game/create" method="get">
+        <label for="size">size</label>
+        <select id="size" name="size">
+          <option value="7x6" selected>7x6 (default)</option>
+          <option value="7x8">7x8 (tall)</option>
+          <option value="8x7">8x7 (wide)</option>
+          <option value="8x8">8x8 (square)</option>
+          <option value="10x10">10x10 (big)</option>
+          <option value="12x12">12x12 (huge)</option>
+        </select>
+        <label for="spectating">spectating</label>
+        <select id="spectating" name="spectating">
+          <option value="true" selected>yes</option>
+          <option value="false">no</option>
+        </select>
+
+        <input type="submit" value="start" />
+
+      </form>
+    </div>
+  </div>
+</body>
+
+</html>

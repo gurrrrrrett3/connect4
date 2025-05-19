@@ -1,19 +1,31 @@
 import { defineConfig } from "vite";
+import path from "path";
+import fs from "fs";
 
-module.exports = defineConfig({
+const input = fs.readdirSync(path.resolve("./client/pages")).reduce((acc, file) => {
+    const name = file.replace(/\.html$/, "");
+    const filePath = path.resolve("./client/pages", file);
 
+    acc[name] = filePath;
+    return acc;
+}, {})
+
+const config = defineConfig({
+    root: './client',
     build: {
-        assetsDir: "client",
+        assetsDir: "_",
+        outDir: path.resolve("./dist/client"),
         rollupOptions: {
-            input: {
-                index: "./client/index.html",
-            },
+            input,
             output: {
-                dir: "./client/dist",
-                format: "esm",
-                sourcemap: true,
+
+                entryFileNames: "_/[hash].js",
+                chunkFileNames: "_/[hash].js",
+                assetFileNames: "_/[hash][extname]",
             },
         }
     }
 
 })
+
+export default config;
