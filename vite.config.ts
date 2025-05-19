@@ -1,19 +1,29 @@
 import { defineConfig } from "vite";
+import { resolve } from "path";
+import inject from "@rollup/plugin-inject";
 
-module.exports = defineConfig({
-
+export default defineConfig({
+    root: "src/client",
+    base: "/",
     build: {
-        assetsDir: "client",
+        target: "esnext",
+        outDir: "generated",
+        // minify: 'esbuild',
+        minify: false,
+        // emptyOutDir: true,
+        // sourcemap: true,
         rollupOptions: {
-            input: {
-                index: "./client/index.html",
-            },
+            input: resolve('./src/client/bundled/index.html'),
             output: {
-                dir: "./client/dist",
-                format: "esm",
-                sourcemap: true,
+                entryFileNames: '[name].js',
+                assetFileNames: '[name].[ext]',
             },
         }
-    }
-
-})
+    },
+    plugins: [
+        inject({
+            htmx: "htmx.org",
+            'htmx-ext-sse': 'htmx-ext-sse'
+        })
+    ]
+});

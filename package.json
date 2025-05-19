@@ -17,12 +17,15 @@
     "@mikro-orm/postgresql": "^6.4.11",
     "@mikro-orm/reflection": "^6.4.11",
     "@paralleldrive/cuid2": "^2.2.2",
+    "@wll8/express-ws": "^1.0.6",
     "chalk": "^4.1.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "htmx-ext-ws": "^2.0.3",
     "node-fetch": "^2.7.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
     "@kitajs/ts-html-plugin": "^4.1.1",

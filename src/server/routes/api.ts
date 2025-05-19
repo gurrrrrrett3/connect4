@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import EventsRouter from './events.js';
+import WsRouter from './events.js';
 
 const ApiRouter = Router();
 
-ApiRouter.use('/events', EventsRouter)
+ApiRouter.use('/events', WsRouter)
 
 export default ApiRouter;
